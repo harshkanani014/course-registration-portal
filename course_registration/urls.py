@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('template_routing.urls')),
     path('api/auth/', include('accounts.urls')),
-    path('api/faculty/', include('course_coordinator.urls'))
+    path('api/faculty/', include('course_coordinator.urls')),
+    path('api/student/', include('student.urls'))
 ]

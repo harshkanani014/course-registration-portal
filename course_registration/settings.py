@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'accounts',
     'template_routing',
-    'course_coordinator'
+    'course_coordinator',
+    'student'
 ]
 
 MIDDLEWARE = [
