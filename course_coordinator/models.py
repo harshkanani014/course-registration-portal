@@ -17,8 +17,8 @@ class Courses(models.Model):
 # Model for location of building in which class is going to be conducted
 class Location(models.Model):
     building_name = models.TextField(max_length=5000)
-    latitude = models.DecimalField(max_digits=10, decimal_places=10)
-    longitude = models.DecimalField(max_digits=10, decimal_places=10)
+    latitude = models.DecimalField(max_digits=100, decimal_places=50, default=0)
+    longitude = models.DecimalField(max_digits=100, decimal_places=50, default=0)
 
     def __str__(self):
         return self.building_name
@@ -28,9 +28,11 @@ class Location(models.Model):
 class Classes(models.Model):
     course_code = models.ForeignKey(to=Courses, on_delete=models.CASCADE)
     faculty = models.TextField(max_length=50000)
-    class_time = models.DateTimeField()
+    day = models.TextField(default='')
+    time = models.TimeField(null=True)
     building = models.ForeignKey(to=Location, on_delete=models.CASCADE)
+    students_registered = models.IntegerField(default=0)
 
     class Meta:
-        unique_together = ('course_code', 'faculty',)
+        unique_together = ('course_code', 'faculty', 'day', 'time',)
 

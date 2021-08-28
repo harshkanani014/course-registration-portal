@@ -215,7 +215,7 @@ class AddClass(APIView):
             if not serializer.is_valid():
                 return Response({
                     "success": False,
-                    "error": get_error(serializer.errors),
+                    "error": serializer.errors,
                     "message": "",
                     "data": user.email
                 })
@@ -250,13 +250,106 @@ class GetClass(APIView):
         except:
             return payload
             
-        all_class = ClassSerializer.objects.all()
-        serializer = ClassSerializer(all_class, many=True)
+        all_class = Classes.objects.all()
+        serializer = GetClassSerializer(all_class, many=True)
         return Response({
             'success': True,
             'message':'',
             'data':serializer.data
         })
+
+
+# API to add location for course registration portal
+# API Endpoint : add-location
+# Request : POST
+class AddLocation(APIView):
+    serializer_class = LocationSerializer
+    def post(self, request):
+        payload = verify_token(request)
+        try:
+            user = User.objects.filter(id=payload['id']).first()
+        except:
+            return payload
+        
+        # Permission : Only course co-ordinator can add course
+        if user.is_course_coordinator:
+            serializer = LocationSerializer(data=request.data)
+            
+            if not serializer.is_valid():
+                return Response({
+                    "success": False,
+                    "error": get_error(serializer.errors),
+                    "message": "",
+                    "data": user.email
+                })
+
+            serializer.save()
+            return Response({
+                "success": True,
+                "error": "",
+                "message": "Location added successfully",
+                "data": serializer.data
+            })
+        else:
+            return Response({
+                "success": False,
+                "error": "Not authorized to Add Location",
+                "message": "",
+                "data": {
+                    "email": user.email
+                }
+            })
+
+
+# API to get location for course registration portal
+# API Endpoint : get-class
+# Request : GET
+class GetLocation(APIView):
+    def get(self, request):
+        # verify token for authorization
+        payload = verify_token(request)
+        try:
+            user = User.objects.filter(id=payload['id']).first()  
+        except:
+            return payload
+            
+        all_location = Location.objects.all()
+        serializer = LocationSerializer(all_location, many=True)
+        return Response({
+            'success': True,
+            'message':'',
+            'data':serializer.data
+        })
+
+
+# API to get location for specific course for registration portal
+# API Endpoint : get-course-location/<str:course code>
+# Request : GET
+class GetCourseLocation(APIView):
+    def get(self, request, id):
+        # Query to find classes with specific course code
+        course_required = Courses.objects.get(id=id)
+        #print(course_required)
+        all_class = Classes.objects.filter(course_code=course_required)
+        context = []
+        for i in all_class:
+            d = {}
+            location = Location.objects.get(id=i.building.id)
+            d.update({
+                'course_code': i.course_code.course_code,
+                'faculty': i.faculty,
+                'students_registered': i.students_registered,
+                'building_name':location.building_name,
+                'latitude': location.latitude,
+                'longitude':location.longitude
+            })
+            context.append(d)
+        return Response({
+            'success': True,
+            'message':'',
+            'data': context
+        })
+        
     
 
 
