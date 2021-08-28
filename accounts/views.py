@@ -148,13 +148,14 @@ class OtpVerify(APIView):
                         "success":True,
                         "error":"",
                         "message":"User login successfully",
-                        "token":token,
                         "data":
                             {
                             "id":user.id,
+                            "registration_number": user.registration_number,
                             "email":user.email,
                             "is_student":user.is_student,
-                            "is_course_coordinator": user.is_course_coordinator
+                            "is_course_coordinator": user.is_course_coordinator,
+                            "token":token,
                            }
                         }
                     return response
