@@ -23,6 +23,7 @@ class Location(models.Model):
     def __str__(self):
         return self.building_name
 
+
 # Model to add classes
 class Classes(models.Model):
     course_code = models.ForeignKey(to=Courses, on_delete=models.CASCADE)

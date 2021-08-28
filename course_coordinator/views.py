@@ -176,8 +176,8 @@ class AddCourse(APIView):
 
 
 # API to get courses for course registration portal
-# API Endpoint : get
-# Request : get-course
+# API Endpoint : get-course
+# Request : GET
 class GetCourse(APIView):
     def get(self, request):
         # verify token for authorization
@@ -189,6 +189,69 @@ class GetCourse(APIView):
             
         all_courses = Courses.objects.all()
         serializer = CourseSerializer(all_courses, many=True)
+        return Response({
+            'success': True,
+            'message':'',
+            'data':serializer.data
+        })
+
+
+# API to add class for course registration portal
+# API Endpoint : add-class
+# Request : POST
+class AddClass(APIView):
+    serializer_class = ClassSerializer
+    def post(self, request):
+        payload = verify_token(request)
+        try:
+            user = User.objects.filter(id=payload['id']).first()
+        except:
+            return payload
+        
+        # Permission : Only course co-ordinator can add course
+        if user.is_course_coordinator:
+            serializer = ClassSerializer(data=request.data)
+            
+            if not serializer.is_valid():
+                return Response({
+                    "success": False,
+                    "error": get_error(serializer.errors),
+                    "message": "",
+                    "data": user.email
+                })
+
+            serializer.save()
+            return Response({
+                "success": True,
+                "error": "",
+                "message": "Class added successfully",
+                "data": serializer.data
+            })
+        else:
+            return Response({
+                "success": False,
+                "error": "Not authorized to Add Class",
+                "message": "",
+                "data": {
+                    "email": user.email
+                }
+            })
+
+
+# API to get class for course registration portal
+# API Endpoint : get-class
+# Request : GET
+class GetClass(APIView):
+    def get(self, request):
+        # verify token for authorization
+        payload = verify_token(request)
+        try:
+            user = User.objects.filter(id=payload['id']).first()  
+        except:
+            return payload
+            
+        all_class = ClassSerializer.objects.all()
+        serializer = ClassSerializer(all_class, many=True)
         return Response({
             'success': True,
             'message':'',
