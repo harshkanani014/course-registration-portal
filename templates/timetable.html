@@ -10,6 +10,12 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="./static/images/favicon.ico">
 
+        <link href="./static/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="./static/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+        <link href="./static/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" /> 
+
         <!-- preloader css -->
         <link rel="stylesheet" href="./static/css/preloader.min.css" type="text/css" />
 
@@ -91,7 +97,7 @@
                                 <!-- item-->
                                 <a class="dropdown-item" href="apps-contacts-profile.html"><i class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Profile</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="auth-logout.html"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
+                                <a class="dropdown-item" href="index.html"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
                             </div>
                         </div>
 
@@ -197,10 +203,10 @@
                                                 <th>time</th>
                                             </tr>
                                             </thead>
-        
+
         
                                             <tbody>
-                                    
+                                               
                                            </tbody>
                                         </table>
         
@@ -375,16 +381,28 @@
         <div class="rightbar-overlay"></div>
 
         <!-- JAVASCRIPT -->
+      
+       
         <script src="./static/libs/jquery/jquery.min.js"></script>
         <script src="./static/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="./static/libs/metismenu/metisMenu.min.js"></script>
         <script src="./static/libs/simplebar/simplebar.min.js"></script>
         <script src="./static/libs/node-waves/waves.min.js"></script>
         <script src="./static/libs/feather-icons/feather.min.js"></script>
-        <!-- pace js -->
-        <script src="./static//libs/pace-js/pace.min.js"></script>
+        <script src="./static/libs/pace-js/pace.min.js"></script>
+        <script src="./static/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="./static/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="./static/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="./static/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
-        <script src="./static//js/app.js"></script>
+        <!-- Datatable init js -->
+
+        <script src="./static/js/pages/datatables.init.js"></script>
+
+        <!-- pace js -->
+        
+
+        <script src="./static/js/app.js"></script>
         <script>
             function getData(data) {
                         $('#edit-user-btn').click();
