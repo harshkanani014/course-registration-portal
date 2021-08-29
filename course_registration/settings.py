@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'accounts',
-    'template_routing',
     'course_coordinator',
     'student'
 ]
