@@ -38,6 +38,7 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
 
 
+# course to add and update course
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Courses
@@ -58,6 +59,7 @@ class CourseSerializer(serializers.ModelSerializer):
         return instance
 
 
+# class serializer to add and update class
 class ClassSerializer(serializers.ModelSerializer):
     class Meta:
         model = Classes
@@ -78,6 +80,8 @@ class ClassSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+
+# class serializer to get all class details
 class GetClassSerializer(serializers.ModelSerializer):
     course_code = serializers.StringRelatedField()
     building = serializers.StringRelatedField()
@@ -90,7 +94,8 @@ class GetClassSerializer(serializers.ModelSerializer):
             'building_name':{'read_only':True},
         }
 
-  
+
+# Location serializer to add and update location  
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location

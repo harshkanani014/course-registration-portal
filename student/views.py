@@ -1,17 +1,27 @@
-from time import time
-from django.shortcuts import render
-from django.http.response import HttpResponse
+"""
+organization : motorQ
+created_by : Harsh Kanani
+last_updated_by : Harsh Kanani
+last_updated : '28-08-2021'
+Code-format-standard : PEP-8
+Status : {
+    "API": done, 
+    "backend testing : done, 
+    "documentation: done,
+    "postman API added" : done,
+    }
+"""
+
+
 from accounts.models import User
 from rest_framework.response import Response
 from django.http import JsonResponse
 from .serializers import *
 import jwt
-import math
-from django.db.models import Q
 from rest_framework.views import APIView
 from .models import *
-import io
-from rest_framework.parsers import MultiPartParser, FormParser
+
+
 
 # Create your views here.
 
@@ -58,8 +68,8 @@ def verify_token(request):
     return payload
 
 
-# API to add users for course registration portal
-# API Endpoint : add-course
+# API to register course  for course registration portal
+# API Endpoint : register-course
 # Request : POST
 class AddTimeTable(APIView):
     serializer_class = TimeTableSerializer
@@ -70,7 +80,7 @@ class AddTimeTable(APIView):
         except:
             return payload
         
-        # Permission : Only course co-ordinator can add course
+        # Permission : Only course student can register course
         if user.is_student:
             serializer = TimeTableSerializer(data=request.data)
             class_id = request.data['class_id']
@@ -104,7 +114,7 @@ class AddTimeTable(APIView):
             })
 
 
-# API to get location for course registration portal
+# API to get timtable for course registration portal
 # API Endpoint : get-timetable
 # Request : GET
 class GetTimeTable(APIView):
@@ -163,10 +173,11 @@ class AllCourses(APIView):
             return payload
         
         
-        # Queries to exclude registered courses from all available classes
+        # Queries to exclude registered courses and slot clash from all available classes
         all_timetable = TimeTable.objects.filter(student_id=user)
         all_classes = Classes.objects.all().exclude(id__in=all_timetable.values_list('class_id')).exclude(day__in=all_timetable.values_list('class_id__day'))
         all_classes = all_classes.exclude(time__in=all_timetable.values_list('class_id__time'))
+        
         serializer = GetClassSerializer(all_classes, many=True)
         return Response({
             'success': True,

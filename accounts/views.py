@@ -4,7 +4,12 @@ created_by : Harsh Kanani
 last_updated_by : Harsh Kanani
 last_updated : '28-08-2021'
 Code-format-standard : PEP-8
-
+Status : {
+    "API": done, 
+    "backend testing : done, 
+    "documentation: done,
+    "postman API added" : done,
+    }
 """
 
 
@@ -17,7 +22,8 @@ import random
 import time
 from django.http import JsonResponse
 from django.core.mail import EmailMultiAlternatives
-from django.shortcuts import redirect, render
+
+
 
 # Function for sending OTP via email
 def send_email(otp, email_1):
@@ -25,6 +31,7 @@ def send_email(otp, email_1):
     email = EmailMultiAlternatives('2FA OTP for COURSE REGISTRATION portal', ' Your OTP is :' + otp)
     email.to = [email_1]
     email.send()
+
 
 # API to verify user login
 # API Endpoint : /login
@@ -180,7 +187,7 @@ class OtpVerify(APIView):
             return Response(context)
 
 
-# API for resending otp to user after expiring.
+# API for resending otp to user after expiry
 # API Endpoint : /resend-otp
 # Request : GET            
 @api_view(["POST"])

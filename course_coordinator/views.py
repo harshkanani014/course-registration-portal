@@ -12,19 +12,15 @@ Status : {
     }
 """
 
-from django.shortcuts import render
-from django.http.response import HttpResponse
+
 from accounts.models import User
 from rest_framework.response import Response
 from django.http import JsonResponse
 from .serializers import *
 import jwt
-import math
-from django.db.models import Q
 from rest_framework.views import APIView
 from .models import *
-import io
-from rest_framework.parsers import MultiPartParser, FormParser
+
 
 # Function to get serializer errors 
 def get_error(serializerErr):
@@ -133,7 +129,7 @@ class GetUser(APIView):
         })
 
 
-# API to add users for course registration portal
+# API to add courses for course registration portal
 # API Endpoint : add-course
 # Request : POST
 class AddCourse(APIView):
@@ -302,7 +298,7 @@ class AddLocation(APIView):
 
 
 # API to get location for course registration portal
-# API Endpoint : get-class
+# API Endpoint : get-location
 # Request : GET
 class GetLocation(APIView):
     def get(self, request):
@@ -323,7 +319,7 @@ class GetLocation(APIView):
 
 
 # API to get location for specific course for registration portal
-# API Endpoint : get-course-location/<str:course code>
+# API Endpoint : get-course-location/<int:id> id : class id
 # Request : GET
 class GetCourseLocation(APIView):
     def get(self, request, id):
