@@ -2,9 +2,9 @@
 
 ### Name : Kanani Harsh Dhirajlal
 ### Registration No.: 19BCE2562 (VIT-VELLORE)
-## Video Link :
-
-## Postman API Documentation and API collection link :
+## Video Link : https://bit.ly/3sTvR8J
+## more snapshots : https://bit.ly/3kz5VLN
+## Postman API Documentation and API collection link : https://bit.ly/3zwyhfW
 (Note : can download this API collection and documentation form above link and import in postman to view and test ALL API's used in this web app)
 
 ## Backend API's deployed on heroku : https://course-registration-motorq.herokuapp.com/
@@ -51,7 +51,7 @@
 4. Each API has extra layer of security according to user permission
    
 
-## How to run project on you local setup :
+## How to run project on your local setup :
 ## STEP-1 : Install PostgreSQl with pgAdmin
 ### How to install PostgreSQL?
 ##### Download postgreSQL from following link and install 
