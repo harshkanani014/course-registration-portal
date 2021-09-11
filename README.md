@@ -5,7 +5,7 @@
 ## Video Link : https://bit.ly/3sTvR8J
 ## more snapshots : https://bit.ly/3kz5VLN
 ## Postman API Documentation and API collection link : https://bit.ly/3zwyhfW
-(Note : can download this API collection and documentation form above link and import in postman to view and test ALL API's used in this web app)
+(Note : can download this API collection and documentation from above link and import in postman to view and test ALL API's used in this web app)
 
 ## Backend API's deployed on heroku : https://course-registration-motorq.herokuapp.com/
 
