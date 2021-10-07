@@ -1,7 +1,5 @@
 # Course Registration Portal
 
-### Name : Kanani Harsh Dhirajlal
-### Registration No.: 19BCE2562 (VIT-VELLORE)
 ## Video Link : https://bit.ly/3sTvR8J
 ## more snapshots : https://bit.ly/3kz5VLN
 ## Postman API Documentation and API collection link : https://bit.ly/3zwyhfW
